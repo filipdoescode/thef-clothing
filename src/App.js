@@ -1,46 +1,68 @@
+import React, { Component } from "react";
 import "./App.css";
-import { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { Switch, Route } from "react-router-dom";
 
 // Components
+import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
-import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
-let unsubscribeFromAuth = null;
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-function App() {
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      console.log(user);
-    });
-
-    return () => {
-      unsubscribeFromAuth();
+    this.state = {
+      currentUser: null,
     };
-  }, [currentUser]);
+  }
 
-  return (
-    <div>
-      <Header currentUser={currentUser} />
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route path="/shop">
-          <ShopPage />
-        </Route>
-        <Route path="/signin">
-          <SignInAndSignUpPage />
-        </Route>
-      </Switch>
-    </div>
-  );
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+
+          console.log(this.state);
+        });
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser} />
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/shop">
+            <ShopPage />
+          </Route>
+          <Route path="/signin">
+            <SignInAndSignUpPage />
+          </Route>
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;

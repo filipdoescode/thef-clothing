@@ -1,11 +1,14 @@
 import React from "react";
 import "./header.styles.scss";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { useSelector } from "react-redux";
 
 import { NavLink } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
 
-const Header = ({ currentUser }) => {
+const Header = () => {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
     <div className="header">
       <NavLink to="/" className="logo-container">
@@ -32,5 +35,4 @@ const Header = ({ currentUser }) => {
   );
 };
 
-// 77
 export default Header;

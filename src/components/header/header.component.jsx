@@ -2,24 +2,35 @@ import React from "react";
 import "./header.styles.scss";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { auth } from "../../firebase/firebase.utils";
 
-const Header = () => {
+const Header = ({ currentUser }) => {
   return (
     <div className="header">
-      <Link to="/" className="logo-container">
+      <NavLink to="/" className="logo-container">
         <Logo className="logo" />
-      </Link>
+      </NavLink>
       <div className="options">
-        <Link className="option" to="/shop">
+        <NavLink className="option" to="/shop" activeClassName="active-nav">
           SHOP
-        </Link>
-        <Link className="option" to="/shop">
+        </NavLink>
+        <NavLink className="option" to="/contact" activeClassName="active-nav">
           CONTACT
-        </Link>
+        </NavLink>
+        {currentUser ? (
+          <div className="option" onClick={() => auth.signOut()}>
+            SIGN OUT
+          </div>
+        ) : (
+          <NavLink className="option" to="/signin" activeClassName="active-nav">
+            SIGN IN
+          </NavLink>
+        )}
       </div>
     </div>
   );
 };
 
+// 77
 export default Header;

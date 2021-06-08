@@ -3,16 +3,26 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
+  margin-bottom: 25px;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.14);
 
-  .logo-container {
-    width: 50px;
-    // padding: 25px;
+  .active-nav {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
 
-  .logo {
-    width: 100%;
+  .logo-container {
     height: 100%;
+    width: 50px;
+    padding: 10px;
+
+    .logo {
+      height: 50px;
+      width: 65px;
+      padding-left: 30px;
+    }
   }
 
   .options {
@@ -21,9 +31,11 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    padding-right: 50px;
 
     .option {
       padding: 10px 15px;
+      cursor: pointer;
     }
   }
 }

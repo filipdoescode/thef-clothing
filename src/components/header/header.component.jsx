@@ -5,9 +5,14 @@ import { useSelector } from "react-redux";
 
 import { NavLink } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 const Header = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const {
+    user: { currentUser },
+    cart: { hidden },
+  } = useSelector((state) => state);
 
   return (
     <div className="header">
@@ -30,7 +35,9 @@ const Header = () => {
             SIGN IN
           </NavLink>
         )}
+        <CartIcon />
       </div>
+      {!hidden && <CartDropdown />}
     </div>
   );
 };

@@ -2,6 +2,9 @@ import React from "react";
 import "./header.styles.scss";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { useSelector } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 
 import { NavLink } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
@@ -9,10 +12,12 @@ import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 const Header = () => {
-  const {
-    user: { currentUser },
-    cart: { hidden },
-  } = useSelector((state) => state);
+  const { currentUser, hidden } = useSelector(
+    createStructuredSelector({
+      currentUser: selectCurrentUser,
+      hidden: selectCartHidden,
+    })
+  );
 
   return (
     <div className="header">

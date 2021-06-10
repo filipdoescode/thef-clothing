@@ -2,11 +2,15 @@ import React from "react";
 import "./cart-dropdown.styles.scss";
 import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
+import { selectCartItems } from "../../redux/cart/cart.selectors";
 
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 
-const CartDropdown = () => {
-  const { cartItems } = useSelector((state) => state.cart);
+const CartDropdown = ({ cartItems }) => {
+  // const cartItems = useSelector((state) => selectCartItems(state));
+
+  // console.log(cartItems, "I rerendered");
+
   return (
     <div className="cart-dropdown">
       <div className="cart-items">
@@ -20,4 +24,9 @@ const CartDropdown = () => {
   );
 };
 
-export default CartDropdown;
+const mapStateToProps = (state) => {
+  console.log("I rerendered");
+  return { cartItems: selectCartItems(state) };
+};
+
+export default connect(mapStateToProps)(CartDropdown);

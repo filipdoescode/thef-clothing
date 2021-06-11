@@ -1,5 +1,5 @@
 import React from "react";
-import "./cart-dropdown.styles.scss";
+import styles from "./cart-dropdown.styles.module.scss";
 import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
@@ -19,14 +19,14 @@ const CartDropdown = () => {
   };
 
   return (
-    <div className="cart-dropdown">
-      <div className="cart-items">
+    <div className={styles["cart-dropdown"]}>
+      <div className={styles["cart-items"]}>
         {cartItems.length ? (
           cartItems.map((cartItem) => (
             <CartItem key={cartItem.id} item={cartItem} />
           ))
         ) : (
-          <span className="empty-message">Your cart is empty</span>
+          <span className={styles["empty-message"]}>Your cart is empty</span>
         )}
       </div>
 

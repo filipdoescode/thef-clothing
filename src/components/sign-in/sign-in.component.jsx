@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./sign-in.styles.scss";
+import styles from "./sign-in.styles.module.scss";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
@@ -30,7 +30,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-in">
+    <div className={styles["sign-in"]}>
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
 
@@ -51,7 +51,7 @@ const SignIn = () => {
           handleChange={passwordChangeHandler}
           required
         />
-        <div className="buttons">
+        <div className={styles.buttons}>
           <CustomButton>Sign In</CustomButton>
           <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
             Sign In with Google

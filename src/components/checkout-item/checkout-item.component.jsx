@@ -1,5 +1,5 @@
 import React from "react";
-import "./checkout-item.styles.scss";
+import styles from "./checkout-item.styles.module.scss";
 import { useDispatch } from "react-redux";
 import {
   clearItemFromCart,
@@ -23,24 +23,24 @@ const CheckoutItem = ({ cartItem }) => {
   };
 
   return (
-    <div className="checkout-item">
-      <div className="image-container">
+    <div className={styles["checkout-item"]}>
+      <div className={styles["image-container"]}>
         <img alt="item" src={cartItem.imageUrl} />
       </div>
-      <span className="name">{cartItem.name}</span>
-      <span className="quantity">
-        <div onClick={removeItemFromCartHadnler} className="arrow">
+      <span className={styles.name}>{cartItem.name}</span>
+      <span className={styles.quantity}>
+        <div onClick={removeItemFromCartHadnler} className={styles.arrow}>
           {" "}
           &#10094;{" "}
         </div>
-        <span className="value">{cartItem.quantity}</span>
-        <div onClick={addItemToCartHandler} className="arrow">
+        <span className={styles.value}>{cartItem.quantity}</span>
+        <div onClick={addItemToCartHandler} className={styles.arrow}>
           &#10095;
         </div>
       </span>
 
-      <span className="price">{cartItem.price}</span>
-      <div onClick={clearFromCartHandler} className="remove-button">
+      <span className={styles.price}>{cartItem.price}</span>
+      <div onClick={clearFromCartHandler} className={styles["remove-button"]}>
         &#10005;
       </div>
     </div>

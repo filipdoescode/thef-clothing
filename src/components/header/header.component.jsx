@@ -1,5 +1,5 @@
 import React from "react";
-import "./header.styles.scss";
+import styles from "./header.styles.module.scss";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -20,23 +20,35 @@ const Header = () => {
   );
 
   return (
-    <div className="header">
-      <NavLink to="/" className="logo-container">
-        <Logo className="logo" />
+    <div className={styles.header}>
+      <NavLink to="/" className={styles["logo-container"]}>
+        <Logo className={styles.logo} />
       </NavLink>
-      <div className="options">
-        <NavLink className="option" to="/shop" activeClassName="active-nav">
+      <div className={styles.options}>
+        <NavLink
+          className={styles.option}
+          to="/shop"
+          activeClassName="active-nav"
+        >
           SHOP
         </NavLink>
-        <NavLink className="option" to="/contact" activeClassName="active-nav">
+        <NavLink
+          className={styles.option}
+          to="/contact"
+          activeClassName="active-nav"
+        >
           CONTACT
         </NavLink>
         {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
+          <div className={styles.option} onClick={() => auth.signOut()}>
             SIGN OUT
           </div>
         ) : (
-          <NavLink className="option" to="/signin" activeClassName="active-nav">
+          <NavLink
+            className={styles.option}
+            to="/signin"
+            activeClassName={styles["active-nav"]}
+          >
             SIGN IN
           </NavLink>
         )}

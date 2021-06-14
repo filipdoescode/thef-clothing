@@ -6,7 +6,7 @@ import { selectCollection } from "../../redux/shop/shop.selector";
 import CollectionItem from "../../components/collection-item/collection-item.component";
 import { useRouteMatch } from "react-router-dom";
 
-const CategoryPage = (props) => {
+const CategoryPage = () => {
   const match = useRouteMatch();
   const { items, title } = useSelector(
     selectCollection(match.params.collectionId)

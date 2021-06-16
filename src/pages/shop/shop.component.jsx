@@ -4,13 +4,13 @@ import CollectionsOverviewContainer from "../../components/collection-overview/c
 import CollectionPageContainer from "../collection/collection.container";
 import { Route, useRouteMatch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchCollectionsStartAsync } from "../../redux/shop/shop.actions";
+import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 
 const ShopPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCollectionsStartAsync());
+    dispatch(fetchCollectionsStart());
   }, [dispatch]);
 
   const match = useRouteMatch();

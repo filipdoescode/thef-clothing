@@ -4,7 +4,6 @@ import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "./redux/user/user.selector";
-// import { createStructuredSelector } from "reselect";
 
 import { checkUserSession } from "./redux/user/user.actions";
 
